@@ -29,16 +29,20 @@ function Header() {
             <span className="visually-hidden">(current)</span>
           </Link>
         </li>
+      
+        {
+          user ? <li className="nav-item">
+          <a className="nav-link"  onClick={handleLogout} style={{cursor:'pointer'}} href="#">LogOut</a>
+        </li>
+        :
+        <>
         <li className="nav-item">
           <Link className="nav-link" to="/login">Login</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/register">Register</Link>
         </li>
-        {
-          user && <li className="nav-item">
-          <a className="nav-link"  onClick={handleLogout} href="#">LogOut</a>
-        </li>
+        </>
         }
       </ul>
       <form className="d-flex">

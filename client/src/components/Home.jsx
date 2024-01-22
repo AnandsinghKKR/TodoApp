@@ -34,7 +34,7 @@ function Home() {
       <div className='container'>
         <div className='row justify-contenty-md-center  mt-4 '>
           {
-            list.map((todo,index)=><Todo todo={todo} key={todo._id}/>)
+            list.map((todo,index)=><Todo todo={todo} key={todo._id} setRefreshList={setRefreshList}/>)
           }
        
 

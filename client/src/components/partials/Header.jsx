@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 
-function Header() {
+function Header({searchText,setSearchText}) {
   const navigation=useNavigate();
 
   const[user,setUser]=useState(null);
-
   useEffect(()=>{
     const u=localStorage.getItem('user');
     setUser(u);
@@ -45,10 +44,13 @@ function Header() {
         </>
         }
       </ul>
-      <form className="d-flex">
-        <input className="form-control me-sm-2" type="search" placeholder="Search"/>
+      {
+        user &&  <form className="d-flex">
+        <input className="form-control me-sm-2" type="search" value={searchText} onChange={(e)=>setSearchText(e.target.value)} placeholder="Search"/>
         <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
+      }
+      
     </div>
   </div>
 </nav>

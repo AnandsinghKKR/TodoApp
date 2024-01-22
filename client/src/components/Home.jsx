@@ -11,6 +11,9 @@ function Home() {
   const navigation =useNavigate();
   const [list,setList]=useState([]);
   const [refreshList,setRefreshList]=useState()
+  const [searchText,setSearchText]=useState('');
+  const [filteredList,setFilteredList]=useState([]);
+
   // protection for user that is not logged in
   useEffect(()=>{
     if(!getToken()){
@@ -18,6 +21,15 @@ function Home() {
     }
     fetchTodoList();
   },[refreshList])
+
+  useEffect(()=>{
+    if(searchText===''){
+      setFilteredList(list);
+    }else{
+      const filterlist=list.filter(todo=>todo.desc.toLowerCase().includes(searchText.toLowerCase().trim()));
+      setFilteredList(filterlist);
+    }
+  },[list,searchText])
 
   async function fetchTodoList(){
     const result=await  getTodoListApi();
@@ -29,14 +41,18 @@ function Home() {
 
   return (
     <div>
-      <Header/>
+      <Header searchText={searchText} setSearchText={setSearchText}/>
       <ToastContainer/>
       <div className='container'>
         <div className='row justify-contenty-md-center  mt-4 '>
           {
-            list.map((todo,index)=><Todo todo={todo} key={todo._id} setRefreshList={setRefreshList}/>)
+            filteredList.map((todo,index)=><Todo todo={todo} key={todo._id} setRefreshList={setRefreshList}/>)
           }
-       
+       {
+        filteredList.length===0 &&  <div className="notFoundTodos">
+          No Todos Found
+        </div>
+       }
 
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createTodoApi } from '../../services/api.js';
+import { createTodoApi } from '../../services/api';
 import {toast} from "react-toastify";
 
 

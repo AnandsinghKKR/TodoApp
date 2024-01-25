@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from "moment/moment";
-import { MarkTodoApi, deleteTodoApi } from '../../services/api';
+import { MarkTodoApi, deleteTodoApi } from '../../services/api.js';
 import {toast} from 'react-toastify';
 
 function Todo({todo,setRefreshList}) {
